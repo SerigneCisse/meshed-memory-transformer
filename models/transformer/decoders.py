@@ -47,6 +47,7 @@ class MeshedDecoderLayer(Module):
         alpha3 = torch.sigmoid(self.fc_alpha3(torch.cat([self_att, enc_att3], -1)))
 
         enc_att = (enc_att1 * alpha1 + enc_att2 * alpha2 + enc_att3 * alpha3) // np.sqrt(3)
+        enc_att =enc_att.long()
         enc_att = enc_att * mask_pad
 
         ff = self.pwff(enc_att)
